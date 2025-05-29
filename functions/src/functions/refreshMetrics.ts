@@ -32,7 +32,7 @@ export const refreshMetrics = onTaskDispatched<RefreshMetricsData>(
       });
       throw error; // Re-throw to ensure the task is retried
     }
-  }
+  },
 );
 
 const onRefreshMetrcis = async (mintAddress: string) => {

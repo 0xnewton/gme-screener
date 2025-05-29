@@ -27,9 +27,7 @@ interface UpdateTokenPayload {
 }
 
 export const getAllTokens = async (): Promise<Token[]> => {
-  const tokenCollectionRef = getTokenCollectionRef().withConverter(
-    pumpFunTokenConverter
-  );
+  const tokenCollectionRef = getTokenCollectionRef().withConverter(pumpFunTokenConverter);
   const mcField: keyof Token = "marketCapUsd";
   const q = tokenCollectionRef.orderBy(mcField, "desc");
   const snapshot = await q.get();
@@ -38,7 +36,7 @@ export const getAllTokens = async (): Promise<Token[]> => {
 
 export const updateToken = async (
   mintAddress: string,
-  payload: UpdateTokenPayload
+  payload: UpdateTokenPayload,
 ): Promise<void> => {
   logger.info("Updating token", {
     mintAddress,
@@ -47,9 +45,7 @@ export const updateToken = async (
   if (payload.holdersCount === undefined) {
     delete payload.holdersCount;
   }
-  const tokenRef = getTokenCollectionRef()
-    .doc(mintAddress)
-    .withConverter(pumpFunTokenConverter);
+  const tokenRef = getTokenCollectionRef().doc(mintAddress).withConverter(pumpFunTokenConverter);
 
   await tokenRef.update({
     ...payload,

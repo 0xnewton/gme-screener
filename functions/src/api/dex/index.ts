@@ -2,14 +2,12 @@ import axios from "axios";
 import { logger } from "firebase-functions";
 import { DexScreenerPair } from "./types";
 
-export const getDexData = async (
-  mintAddress: string
-): Promise<DexScreenerPair> => {
+export const getDexData = async (mintAddress: string): Promise<DexScreenerPair> => {
   logger.info("Fetching DEX data for mint address", {
     mintAddress: mintAddress,
   });
-  const pairs = await axios.get<any, DexScreenerPair[]>(
-    `https://api.dexscreener.com/solana/${mintAddress}`
+  const pairs = await axios.get<unknown, DexScreenerPair[]>(
+    `https://api.dexscreener.com/solana/${mintAddress}`,
   );
 
   logger.info("Fetched DEX data", {
