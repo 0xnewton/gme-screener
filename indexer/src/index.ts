@@ -28,6 +28,7 @@ const main = async () => {
   sdk.addEventListener("createEvent", async (ev) => {
     const mintAddr = ev.mint.toBase58();
     console.log(`New event: ${ev.name} (${ev.symbol}) at ${mintAddr}`);
+    console.log(ev)
     if (!mintAddr.endsWith("GME")) return;
 
     // await db
