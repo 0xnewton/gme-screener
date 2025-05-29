@@ -4,6 +4,8 @@ import { updateToken } from "../api/db";
 import { logger } from "firebase-functions/v2";
 import { getDexData } from "../api/dex";
 
+export const REFRESH_METRICS_QUEUE_NAME = "refreshMetrics";
+
 export const refreshMetrics = onTaskDispatched<RefreshMetricsData>(
   {
     retryConfig: {

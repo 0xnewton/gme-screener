@@ -1,7 +1,7 @@
 import { FirestoreDataConverter } from "firebase-admin/firestore";
 import { Token } from "../../types";
 
-export const pumpFunTokenConverter: FirestoreDataConverter<Token> = {
+export const createToken: FirestoreDataConverter<Token> = {
   toFirestore: (token) => ({
     ...token,
     // createdAt & updatedAt should already be Timestamps

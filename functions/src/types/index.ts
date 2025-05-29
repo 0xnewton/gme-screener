@@ -18,11 +18,11 @@ export interface Token {
   name: string;
   symbol: string;
   mintAddress: string;
-  creator: string;
   createdAt: Timestamp;
 
-  pairAddress: string;
-  quoteAddress: string;
+  creator?: string;
+  pairAddress?: string;
+  quoteAddress?: string;
 
   /** Live metrics */
   marketCapUsd?: number; // total liquidity in USD
