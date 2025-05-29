@@ -10,8 +10,12 @@ RUN npm ci --only=production
 # COPY src ./src
 # RUN npm run build      # emits dist/lister.js
 
-# Otherwise, just copy your compiled code
-COPY dist ./dist
+# Copy the rest of your app's source code into the directory /app in the container
+COPY . .
 
-ENV SOLANA_RPC_URL=""  # override at deploy time
+# Compile TypeScript to JavaScript
+RUN npm run build
+
 CMD ["node", "dist/index.js"]
+
+EXPOSE 8080

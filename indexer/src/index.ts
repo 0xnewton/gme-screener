@@ -1,10 +1,11 @@
-import "dotenv/config";
+// import "dotenv/config";
 // import * as admin from 'firebase-admin';
 import { Connection, Keypair } from "@solana/web3.js";
 // import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet';
 // import NodeWallet from '@coral-xyz/anchor/nodewallet';
 import { AnchorProvider, Wallet } from "@coral-xyz/anchor";
 import { PumpFunSDK } from "pumpdotfun-sdk";
+import http                    from 'http';
 
 // admin.initializeApp({
 //   credential: admin.credential.applicationDefault(),
@@ -47,3 +48,14 @@ const main = async () => {
 };
 
 main();
+
+// Then start a minimal HTTP server so Cloud Run’s health check passes:
+const port = parseInt(process.env.PORT ?? '8080', 10);
+http
+  .createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('ok');
+  })
+  .listen(port, () => {
+    console.log(`✅ Health-check server listening on port ${port}`);
+  });

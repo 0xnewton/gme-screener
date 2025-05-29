@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "tsc",
+    "deploysdfsdfsdfsd": "dotenv -- gcloud run deploy gme-indexer --source . --project=gme-screener-461314 --region=us-east1 --no-allow-unauthenticated --min-instances=1 --max-instances=1 --concurrency=1 --cpu=1",
+    "deploy": "chmod +x scripts/deploy.sh && bash scripts/deploy.sh"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +18,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.24",
+    "dotenv-cli": "^8.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
