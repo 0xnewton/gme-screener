@@ -16,16 +16,8 @@
       ],
       "rewrites": [
         {
-          "source": "/leaderboard",
-          "destination": "/src/widgets/Leaderboard.html"
-        },
-        {
-          "source": "/spank",
-          "destination": "/src/widgets/SpankingGame.html"
-        },
-        {
           "source": "/",
-          "destination": "/src/widgets/SpankingGame.html"
+          "destination": "/src/widgets/Leaderboard.html"
         }
       ]
     }

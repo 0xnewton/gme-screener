@@ -16,7 +16,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         leaderboard: resolve(__dirname, "src/widgets/Leaderboard.html"),
-        spankinggame: resolve(__dirname, "src/widgets/SpankingGame.html"),
       },
       output: {
         manualChunks(id) {
@@ -24,10 +23,6 @@ export default defineConfig({
             if (id.includes("firebase")) {
               return "vendor_firebase";
             }
-            if (id.includes("framer-motion")) {
-              return "vendor_framer-motion";
-            }
-            return "vendor";
           }
         },
       },
