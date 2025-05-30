@@ -13,7 +13,6 @@ export const refreshMetrics = onTaskDispatched<RefreshMetricsData>(
       maxAttempts: 2,
     },
     rateLimits: {
-      maxConcurrentDispatches: 6,
       maxDispatchesPerSecond: 4,
     },
   },
