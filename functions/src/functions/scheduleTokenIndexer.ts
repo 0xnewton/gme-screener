@@ -8,7 +8,7 @@ import { REFRESH_METRICS_QUEUE_NAME } from "./refreshMetrics";
 
 const queue = functionsClient.taskQueue(REFRESH_METRICS_QUEUE_NAME);
 
-export const scheduleTokenIndexer = onSchedule("every 12 hours", async () => {
+export const scheduleTokenIndexer = onSchedule("every 5 minutes", async () => {
   functions.logger.info("Scheduled backup indexer");
   const allTokens = await getGMETokens();
   functions.logger.info(`Found tokens to refresh metrics`, {
