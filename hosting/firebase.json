@@ -1,0 +1,33 @@
+{
+    "hosting": {
+      "public": "dist",
+      "cleanUrls": true,
+      "trailingSlash": false,
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }
+          ]
+        }
+      ],
+      "rewrites": [
+        {
+          "source": "/leaderboard",
+          "destination": "/src/widgets/Leaderboard.html"
+        },
+        {
+          "source": "/spank",
+          "destination": "/src/widgets/SpankingGame.html"
+        },
+        {
+          "source": "/",
+          "destination": "/src/widgets/SpankingGame.html"
+        }
+      ]
+    }
+  }
+  

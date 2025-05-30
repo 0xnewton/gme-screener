@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "outDir": "lib",
+    "sourceMap": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "useUnknownInCatchVariables": false,
+    "esModuleInterop": true
+  },
+  "include": ["src/scripts/**/*.cjs"],
+  "exclude": ["node_modules", "tests", "src/**/*.test.cjs"]
+}
