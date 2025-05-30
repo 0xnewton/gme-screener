@@ -15,7 +15,7 @@ export const scheduleTokenIndexer = onSchedule("every 12 hours", async () => {
     count: allTokens.length,
   });
   const promises: Promise<Token | undefined>[] = [];
-  for (const token of allTokens.slice(0, 5)) {
+  for (const token of allTokens) {
     const awaitRes = _createToken(token);
     promises.push(awaitRes);
   }
