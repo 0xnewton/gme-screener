@@ -1,14 +1,14 @@
 /* Theme Variables */
 :root {
-    --primary-color: #FF6F61;        /* A warm coral color */
-    --secondary-color: #7a6a10;
+    --primary-color: #E6260F;        /* A warm coral color */
+    --secondary-color: #0D1B2A;
     --background-color: #1f1f1f;     /* Dark theme background */
     --background-color-highlight: #333; /* Slightly lighter shade for contrast */
     --secondary-background-color: #444;     /* Dark theme background */
     --secondary-background-color-hightlight: #777; /* Slightly lighter shade for contrast */
     --text-color: #FFFFFF;           /* White text color */
     --link-color: var(--primary-color);
-    --link-hover-color: #FF8A80;     /* Lighter shade for hover effect */
+    --link-hover-color: #E6260F;     /* Lighter shade for hover effect */
     --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     --border-radius: 8px;
 }

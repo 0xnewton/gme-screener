@@ -8,7 +8,7 @@ const Leaderboard: React.FC = () => {
     console.error("Error fetching tokens:", error);
     return <div>Error loading leaderboard</div>;
   }
-  return <LeaderboardScaffold loading={loading} />;
+  return <LeaderboardScaffold loading={loading} tokens={tokens} />;
 };
 
 export default Leaderboard;
