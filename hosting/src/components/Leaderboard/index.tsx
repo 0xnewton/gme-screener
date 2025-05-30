@@ -1,7 +1,14 @@
+import { useTokens } from "../../hooks/useTokens";
 import { Leaderboard as LeaderboardScaffold } from "./Leaderboard";
 
 const Leaderboard: React.FC = () => {
-  return <LeaderboardScaffold loading={false} />;
+  const { data: tokens, loading, error } = useTokens();
+  console.log("Tokens:", tokens);
+  if (error) {
+    console.error("Error fetching tokens:", error);
+    return <div>Error loading leaderboard</div>;
+  }
+  return <LeaderboardScaffold loading={loading} />;
 };
 
 export default Leaderboard;
