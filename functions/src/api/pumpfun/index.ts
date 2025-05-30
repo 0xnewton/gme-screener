@@ -6,7 +6,15 @@ export interface PumpFunCoin {
   mint: string;
   name: string;
   symbol: string;
+  description: string | null;
+  twitter: string | null;
+  telegram: string | null;
+  bonding_curve: string | null;
+  associated_bonding_curve: string | null; // e.g. "https://pump.fun/curve/0x1234567890abcdef1234567890abcdef12345678"
+  creator: string;
   created_timestamp: number; // ms since epoch
+  image_uri: string | null; // URL to the token image
+  metadata_uri: string | null; // URL to the token metadata
 }
 
 export const getGMETokens = async (hours = 24, pageSize = 48): Promise<PumpFunCoin[]> => {

@@ -70,6 +70,14 @@ const _createToken = async (token: PumpFunCoin): Promise<Token | undefined> => {
     name: token.name,
     symbol: token.symbol,
     mintAddress: token.mint,
+    creator: token.creator ?? null,
+    imageURI: token.image_uri ?? null,
+    metadataURI: token.metadata_uri ?? null,
+    description: token.description ?? null,
+    twitter: token.twitter ?? null,
+    telegram: token.telegram ?? null,
+    bonding_curve: token.bonding_curve ?? null,
+    associated_bonding_curve: token.associated_bonding_curve ?? null,
   });
   return createdToken;
 };

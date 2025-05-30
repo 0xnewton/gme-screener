@@ -56,7 +56,20 @@ interface CreateTokenPayload {
   name: string;
   symbol: string;
   mintAddress: string;
+  creator: string | null;
+  imageURI: string | null;
+  metadataURI: string | null;
+  description: string | null;
+  twitter: string | null;
+  telegram: string | null;
+  bonding_curve: string | null;
+  associated_bonding_curve: string | null;
 }
+
+const NULL_TXNS: DexTransactions = {
+  buys: 0,
+  sells: 0,
+};
 
 export const createToken = async (payload: CreateTokenPayload): Promise<Token> => {
   logger.info("Creating new token", {
@@ -67,6 +80,25 @@ export const createToken = async (payload: CreateTokenPayload): Promise<Token> =
 
   const newToken: Token = {
     ...payload,
+    pairAddress: null,
+    quoteAddress: null,
+    dexUrl: null,
+    marketCapUsd: 0,
+    fdvUsd: 0,
+    priceUsd: 0,
+    priceChange1hPct: 0,
+    priceChange6hPct: 0,
+    priceChange5mPct: 0,
+    priceChange24hPct: 0,
+    volume24hUsd: 0,
+    volume5mUsd: 0,
+    volume1hUsd: 0,
+    volume6hUsd: 0,
+    holdersCount: 0,
+    txns5m: NULL_TXNS,
+    txns1h: NULL_TXNS,
+    txns6h: NULL_TXNS,
+    txns24h: NULL_TXNS,
     createdAt: Timestamp.now(),
   };
 

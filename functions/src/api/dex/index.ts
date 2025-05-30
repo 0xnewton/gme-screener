@@ -4,6 +4,7 @@ import { DexScreenerPair } from "./types";
 
 const ENDPOINT = "https://api.dexscreener.com";
 
+// https://api.dexscreener.com/token-pairs/v1/solana/JB2wezZLdzWfnaCfHxLg193RS3Rh51ThiXxEDWQDpump
 export const getDexData = async (mintAddress: string): Promise<DexScreenerPair> => {
   logger.info("Fetching DEX data for mint address", {
     mintAddress: mintAddress,
