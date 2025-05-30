@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy:dev": "npm run build && firebase use development && firebase deploy --only hosting"
+    "deploy": "npm run build && firebase deploy --only hosting"
     
   },
   "dependencies": {
