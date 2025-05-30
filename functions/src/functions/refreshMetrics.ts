@@ -1,8 +1,9 @@
 import { onTaskDispatched } from "firebase-functions/tasks";
-import { RefreshMetricsData } from "../types";
+import { DexTransactions, RefreshMetricsData } from "../types";
 import { updateToken } from "../api/db";
 import { logger } from "firebase-functions/v2";
 import { getDexData } from "../api/dex";
+import { TxnStats } from "../api/dex/types";
 
 export const REFRESH_METRICS_QUEUE_NAME = "refreshMetrics";
 
@@ -37,6 +38,28 @@ export const refreshMetrics = onTaskDispatched<RefreshMetricsData>(
   },
 );
 
+const NULL_TXNS: DexTransactions = {
+  buys: 0,
+  sells: 0,
+};
+
+const parseTxns = (txns: TxnStats | undefined): DexTransactions => {
+  if (!txns) {
+    return NULL_TXNS;
+  }
+  return {
+    buys: txns.buys ?? 0,
+    sells: txns.sells ?? 0,
+  };
+};
+
+const parseNullableNumber = (value: number | null | undefined): number => {
+  if (value === null || value === undefined) {
+    return 0; // Default to 0 if the value is null or undefined
+  }
+  return value;
+};
+
 const onRefreshMetrcis = async (mintAddress: string) => {
   const dexPair = await getDexData(mintAddress);
 
@@ -64,22 +87,22 @@ const onRefreshMetrcis = async (mintAddress: string) => {
   await updateToken(mintAddress, {
     pairAddress: dexPair.pairAddress,
     quoteAddress: dexPair.quoteToken.address,
-    marketCapUsd: dexPair.marketCap,
-    fdvUsd: dexPair.fdv,
+    marketCapUsd: parseNullableNumber(dexPair?.marketCap),
+    fdvUsd: parseNullableNumber(dexPair?.fdv),
     priceUsd: Number(dexPair.priceUsd),
-    priceChange5mPct: dexPair.priceChange.m5,
-    priceChange1hPct: dexPair.priceChange.h1,
-    priceChange6hPct: dexPair.priceChange.h6,
-    priceChange24hPct: dexPair.priceChange.h24,
-    volume24hUsd: dexPair.volume.h24,
-    volume5mUsd: dexPair.volume.m5,
-    volume1hUsd: dexPair.volume.h1,
-    volume6hUsd: dexPair.volume.h6,
+    priceChange5mPct: parseNullableNumber(dexPair?.priceChange?.m5),
+    priceChange1hPct: parseNullableNumber(dexPair?.priceChange?.h1),
+    priceChange6hPct: parseNullableNumber(dexPair?.priceChange?.h6),
+    priceChange24hPct: parseNullableNumber(dexPair?.priceChange?.h24),
+    volume24hUsd: parseNullableNumber(dexPair?.volume?.h24),
+    volume5mUsd: parseNullableNumber(dexPair?.volume?.m5),
+    volume1hUsd: parseNullableNumber(dexPair?.volume?.h1),
+    volume6hUsd: parseNullableNumber(dexPair?.volume?.h6),
     // holdersCount: holdersCount,
-    txns5m: dexPair.txns.m5,
-    txns1h: dexPair.txns.h1,
-    txns6h: dexPair.txns.h6,
-    txns24h: dexPair.txns.h24,
+    txns5m: parseTxns(dexPair?.txns?.m5),
+    txns1h: parseTxns(dexPair?.txns?.h1),
+    txns6h: parseTxns(dexPair?.txns?.h6),
+    txns24h: parseTxns(dexPair?.txns?.h24),
     dexUrl: dexPair.url || "",
   });
 };

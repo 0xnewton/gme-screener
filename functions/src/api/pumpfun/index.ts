@@ -15,6 +15,7 @@ export const getGMETokens = async (hours = 24, pageSize = 48): Promise<PumpFunCo
   let offset = 0;
   const found: PumpFunCoin[] = [];
 
+  /* eslint-disable no-constant-condition */
   while (true) {
     logger.info(`  → fetching offset=${pageSize}`);
     const res = await fetch(

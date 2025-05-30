@@ -1,3 +1,3 @@
-import { refreshMetrics, scheduleMetricRefresh } from "./functions";
+import { refreshMetrics, scheduleMetricRefresh, scheduleTokenIndexer } from "./functions";
 
-export { refreshMetrics, scheduleMetricRefresh };
+export { refreshMetrics, scheduleMetricRefresh, scheduleTokenIndexer };

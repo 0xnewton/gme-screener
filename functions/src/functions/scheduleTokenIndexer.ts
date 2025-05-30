@@ -8,14 +8,14 @@ import { REFRESH_METRICS_QUEUE_NAME } from "./refreshMetrics";
 
 const queue = functionsClient.taskQueue(REFRESH_METRICS_QUEUE_NAME);
 
-export const scheduleMetricRefresh = onSchedule("every 12 hours", async () => {
+export const scheduleTokenIndexer = onSchedule("every 12 hours", async () => {
   functions.logger.info("Scheduled backup indexer");
   const allTokens = await getGMETokens();
   functions.logger.info(`Found tokens to refresh metrics`, {
     count: allTokens.length,
   });
   const promises: Promise<Token | undefined>[] = [];
-  for (const token of allTokens) {
+  for (const token of allTokens.slice(0, 5)) {
     const awaitRes = _createToken(token);
     promises.push(awaitRes);
   }
@@ -36,9 +36,9 @@ export const scheduleMetricRefresh = onSchedule("every 12 hours", async () => {
   });
 
   const enqueues: Promise<void>[] = [];
-  for (const token of allTokens) {
+  for (const token of successes) {
     const payload: RefreshMetricsData = {
-      mintAddress: token.mint,
+      mintAddress: token.value.mintAddress,
     };
     functions.logger.info("Enqueing refresh metrics request", {
       payload,
@@ -66,18 +66,10 @@ const _createToken = async (token: PumpFunCoin): Promise<Token | undefined> => {
     });
     return undefined;
   }
-  functions.logger.info(`Creating new token`, {
-    mintAddress: token.mint,
-    name: token.name,
-    symbol: token.symbol,
-  });
   const createdToken = await createToken({
     name: token.name,
     symbol: token.symbol,
     mintAddress: token.mint,
-  });
-  functions.logger.info(`Created token`, {
-    mintAddress: createdToken.mintAddress,
   });
   return createdToken;
 };

@@ -3,8 +3,8 @@ export type Period = "m5" | "h1" | "h6" | "h24";
 
 // Reusable stats for transactions
 export interface TxnStats {
-  buys: number;
-  sells: number;
+  buys?: number;
+  sells?: number;
 }
 
 // Token metadata shape
@@ -22,12 +22,12 @@ export interface DexScreenerPair {
   pairAddress: string; // base58 mint‐pair address
   baseToken: TokenInfo;
   quoteToken: TokenInfo;
-  priceNative: string; // on-chain price as string
-  priceUsd: string; // USD price as string
-  txns: Record<Period, TxnStats>; // buys/sells per period
-  volume: Record<Period, number>; // volume in USD per period
-  priceChange: Record<Period, number>; // % change per period
-  fdv: number; // fully-diluted value in USD
-  marketCap: number; // market cap in USD
-  pairCreatedAt: number; // timestamp (ms since epoch)
+  priceNative?: string; // on-chain price as string
+  priceUsd?: string; // USD price as string
+  txns?: Partial<Record<Period, TxnStats>>; // buys/sells per period
+  volume?: Partial<Record<Period, number>>; // volume in USD per period
+  priceChange?: Partial<Record<Period, number>>; // % change per period
+  fdv?: number; // fully-diluted value in USD
+  marketCap?: number; // market cap in USD
+  pairCreatedAt?: number; // timestamp (ms since epoch)
 }
